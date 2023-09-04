@@ -1,7 +1,9 @@
 from music21 import stream, note, tempo, instrument, converter
 
 # Create a Stream (musical container)
+instrument = instrument.ElectricGuitar()
 song = stream.Stream()
+song.append(instrument)
 
 # Add a title
 # song.metadata.title = "My Song"
@@ -11,11 +13,18 @@ song = stream.Stream()
 # part.insert(0, instrument.Piano())
 
 
-# Define notes and durations
-notes = [("C4", 4), ("D4", 4), ("E4", 4), ("F4", 4)]
+# # Define notes and durations
+# notes = [("C4", 4), ("D4", 4), ("E4", 4), ("F4", 4)]
 
-song.append(notes)
+note1 = note.Note("C4")
+note2 = note.Note("F#4")
+note3 = note.Note("B-2")
 
+song.append(note1)
+song.append(note2)
+song.append(note3)
+
+song.show()
 
 # # Add notes to the Part
 # for n, duration in notes:
