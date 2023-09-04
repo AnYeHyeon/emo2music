@@ -1,0 +1,18 @@
+face to mucic_server_code
+[f2m]
+	[User]
+		[example] -> user의 ID 명으로 폴더가 만들어져야 함
+			[Image] -> 이미지 업로드
+			[Results]
+				[Csd]
+				[Score] -> 여러장의 악보가 생성되는데, 그중 해당파일명+'_1'된 파일만 띄우면 됨.
+				 		ex) examplehappyF2MPresto81611_1가 resize, merge된 최종 악보.
+				[Wave]
+				test.json -> 불러올 이미지 경로, 옵션, 결과경로 모두 json에 저장됨.
+	create_csd.py -> csd파일을 읽어와 csd.wav 생성 코드
+	create_score.py -> lilypond, musescore4 악보 생성 코드
+			-> musescore4, lilypond 프로그램 설치 경로 변경 필요
+	f2m.py -> Image to music without emotion
+	fin.csd -> 화음생성
+	**main** -> ubuntu 서버에서 '생성' 버튼을 눌렀을 때 최종적으로 실행되는 코드
+	

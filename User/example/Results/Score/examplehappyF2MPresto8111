@@ -1,0 +1,46 @@
+\version "2.24" 
+\include "lilypond-book-preamble.ly"
+    
+color = #(define-music-function (parser location color) (string?) #{
+        \once \override NoteHead #'color = #(x11-color color)
+        \once \override Stem #'color = #(x11-color color)
+        \once \override Rest #'color = #(x11-color color)
+        \once \override Beam #'color = #(x11-color color)
+     #})
+    
+\header { } 
+\score  { 
+ 
+      << \new Staff  = xdwwbbbafzzye { \clef "treble" 
+             \time 1/4
+             b' 4  
+             \bar "|"  %{ end measure 1 %} 
+             ais' 4  
+             \bar "|"  %{ end measure 2 %} 
+             cis' 4  
+             \bar "|"  %{ end measure 3 %} 
+             f' 4  
+             \bar "|"  %{ end measure 4 %} 
+             gis' 4  
+             \bar "|"  %{ end measure 5 %} 
+             c' 4  
+             \bar "|"  %{ end measure 6 %} 
+             c' 4  
+             \bar "|"  %{ end measure 7 %} 
+             ais' 4  
+             \bar "|."  %{ end measure 8 %} 
+              } 
+            
+ 
+        >>
+      
+  } 
+ 
+\paper { }
+\layout {
+  \context {
+    \RemoveEmptyStaffContext
+    \override VerticalAxisGroup #'remove-first = ##t
+  }
+ }
+ 
