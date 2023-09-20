@@ -1,6 +1,5 @@
 import json
 from pathlib import Path
-from create_csd import *
 from f2m import face_to_music
 from create_score import create_score, resize_score
 
@@ -40,10 +39,7 @@ if music_program == 'F2M':
     # 5-1. Run program
     diff_divided, scale_org = face_to_music(img_path, org_wav)
 
-    # 6-1. Create Csd
-    create_csd('f2m/fin.csd', scale_org, diff_divided, csd_path + output_name + '.csd', csd_wav)
-
-    # # 7-1. Create Score   ## error발생 시, lilypond 경로 확인 (Img 미생성시 resize error)
+    # # 6-1. Create Score   ## error발생 시, lilypond 경로 확인 (Img 미생성시 resize error)
     try: 
         create_score(num_note, diff_divided, scale_org, score_path, output_name)
     except:
@@ -51,7 +47,7 @@ if music_program == 'F2M':
     resize_score(score_path, output_name)
 
     print("!!COMPLETE!!")   
-    # 8-1. set json output
+    # 7-1. set json output
     #with open('./User/example/test.json', 'r') as f:
     #    json_update = json.load(f)
     #    json_update['User']['Result']['Output_name'] = output_name
