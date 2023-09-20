@@ -5,7 +5,7 @@ import json
 import cv2
 
 def get_json_f2m_param():
-    with open('f2m/User/example/test.json', 'r') as f:
+    with open('./User/example/test.json', 'r') as f:
 
         json_data = json.load(f)
         option_data = json_data['User']['Option']

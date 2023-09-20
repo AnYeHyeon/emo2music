@@ -16,8 +16,10 @@ A4 = 457
 
 instr LetPlay
  
- giMidiKeys[] fillarray 71, 70, 61, 65, 68, 60, 60, 70
- giDurations[] fillarray 1, 1, 1, 1, 1, 1, 1, 1
+ giMidiKeys[] fillarray 67, 67, 69, 69, 67, 67, 64, 67, 67, 64, 64, 62,
+                        67, 67, 69, 69, 67, 67, 64, 67, 64, 62, 64, 60
+ giDurations[] fillarray 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 4,
+                         1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2
  iIndex = 0 
  iStart = 0
  while iIndex < lenarray(giMidiKeys) do
@@ -31,8 +33,10 @@ endin
 
 instr LetPlay1
 
- iMidiKeys[] fillarray 71, 70, 61, 65, 68, 60, 60, 70
- iDurations[] fillarray 1, 1, 1, 1, 1, 1, 1, 1
+ iMidiKeys[] fillarray 64, 64, 65, 65, 64, 64, 64, 64, 64, 64, 64, 67,
+                       64, 64, 65, 65, 64, 64, 64, 67, 64, 67, 67, 64
+ iDurations[] fillarray 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 4,
+                        1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2
  iIndex = 0
  iStart = 0
  while iIndex < lenarray(iMidiKeys) do
@@ -46,8 +50,10 @@ endin
 
 instr LetPlay2
 
- iMidiKeys[] fillarray 71, 70, 61, 65, 68, 60, 60, 70
- iDurations[] fillarray 1, 1, 1, 1, 1, 1, 1, 1
+ iMidiKeys[] fillarray 72, 72, 77, 77, 72, 72, 72, 72, 72, 72, 72, 78,
+                       72, 72, 77, 77, 72, 72, 72, 72, 72, 78, 78, 72
+ iDurations[] fillarray 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 4,
+                        1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2
  iIndex = 0
  iStart = 0
  while iIndex < lenarray(iMidiKeys) do
