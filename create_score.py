@@ -60,11 +60,14 @@ def create_score(num_note, diff_divided, scale, score_path, output_name):
     s = converter.parse(music_note, format='tinyNotation')
     s.write('lilypond.png', fp = score_path + output_name)
 
+    return music_note
+
 def resize_score(score_path, output_name):
     # print(score_path)
     index = 1
     images = []
     # print(os.listdir(score_path))
+    print('Image resizing...')
     for file in os.listdir(score_path):
         filename, extension = os.path.splitext(file)
         if extension == '.png' or 'page' in file:
@@ -75,7 +78,7 @@ def resize_score(score_path, output_name):
             # print(filename, output_name)
 
             if filename == output_name:
-                print('Image resizing...')
+                # print('Image resizing...')
                 image1 = Image.open(score_path + file)
 
                 # cut image crop(left,up, rigth, down)

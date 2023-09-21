@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from f2m import face_to_music
+from emo import emotion_to_music
 from create_csd import create_csd
 from create_score import create_score, resize_score
 
@@ -55,7 +56,9 @@ if music_program == 'F2M':
     print("!!COMPLETE!!")   
 
 # 7-1. emo Create Score
-# elif music_program == 'EMO':
+elif music_program == 'EMO':
+
+    emotion_to_music(num_note, diff_divided, scale_org)
 
 
 
@@ -63,4 +66,3 @@ if music_program == 'F2M':
 #with open('./User/example/test.json', 'r') as f:
 #    json_update = json.load(f)
 #    json_update['User']['Result']['Output_name'] = output_name
-
