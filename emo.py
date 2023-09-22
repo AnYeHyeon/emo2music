@@ -1,4 +1,5 @@
 import re
+from music21 import *
 
 def emotion_to_music(num_note, diff_divided, scale):
 
@@ -52,8 +53,57 @@ def emotion_to_music(num_note, diff_divided, scale):
 
     print(music_note)
 
-
-
+    # 1. 화성 쌓기
 
     
+    # 2. 악기 할당
+    instrument_musicnote = assigning_instrument(music_note)
+    score = instrument_musicnote
+
+    # 3. BPM 결정
+
+
+    # 4. 
+
+
+
+
+
+
+
+
+    # # Tinynotation을 사용하여 음악 부분(part) 생성
+    # part = converter.parse("tinynotation: " + music_note)
+
+    # # 스코어 생성 및 음악 부분 추가
+    # score = stream.Score()
+    # score.append(part)
+
+    # 스코어 표시 (이 부분은 음악 악보로 결과를 시각화하기 위한 것입니다)
+    score.show()
     print('Hello World!')
+
+
+def assigning_instrument(music_note):
+    # 스코어 생성
+    score = stream.Score()
+
+    # 피아노 파트
+    pianoPart = converter.parse("tinynotation: " + music_note)
+    piano = instrument.Piano()
+    pianoPart.insert(0, piano)
+    score.append(pianoPart)
+
+    # 기타 파트
+    guitarPart = converter.parse("tinynotation: " + music_note)
+    guitar = instrument.AcousticGuitar()
+    guitarPart.insert(0, guitar)
+    score.append(guitarPart)
+
+    # 첼로 파트
+    celloPart = converter.parse("tinynotation: " + music_note)
+    cello = instrument.Violoncello()
+    celloPart.insert(0, cello)
+    score.append(celloPart)
+
+    return score
