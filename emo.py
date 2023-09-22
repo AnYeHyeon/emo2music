@@ -51,4 +51,9 @@ def emotion_to_music(num_note, diff_divided, scale):
     # print(music_note)
 
     print(music_note)
+
+
+
+
+    
     print('Hello World!')
