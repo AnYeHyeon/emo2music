@@ -53,6 +53,7 @@ def emotion_to_music(emotion, num_note, diff_divided, scale):
     # print(music_note)
 
     print(music_note)
+    print('emotion: ' + emotion)
 
     # 1. 화성 쌓기, 2. BPM 할당
     score_with_chord = extend_melody_with_key_chord(music_note, emotion)
@@ -61,22 +62,6 @@ def emotion_to_music(emotion, num_note, diff_divided, scale):
     # 3. 악기 할당
     score_with_instruments = assign_instruments_to_score(score_with_chord, emotion)
     score_with_instruments.show()
-
-
-
-
-
-
-    # # Tinynotation을 사용하여 음악 부분(part) 생성
-    # part = converter.parse("tinynotation: " + music_note)
-
-    # # 스코어 생성 및 음악 부분 추가
-    # score = stream.Score()
-    # score.append(part)
-
-    # 스코어 표시 (이 부분은 음악 악보로 결과를 시각화하기 위한 것입니다)
-    # score.show()
-    print('Hello World!')
 
 import random
 from music21 import stream, note, chord, metadata, tempo
@@ -99,49 +84,52 @@ emotion_to_music_features = {
         "Key": ["C Major", "Bb Minor", "G Minor"],
         "BPM": [120, 90, 84],
         "Octave": [[2]],
-        "Instruments": ["Drums", "Piano", "Electric Guitar", "Chimes", "Mezzo-soprano"]
+        "Instruments": ["Drums", "Violin", "Piano", "Chimes", "Mezzo-soprano"]
     },
     'Angry': {
         "Key": ["F# Minor", "F Minor"],
         "BPM": [125, 120],
         "Octave": [ [2], [3]],
-        "Instruments": ["Drums", "Electric Piano", "Chimes", "Piano"]
+        "Instruments": ["Drums", "Cymbals", "Electric Piano", "Chimes", "Piano"]
     },
     'Sad': {
-        "Key": ["C# Major", "Bb Major"],
+        "Key": ["C# Major", "Bb Minor"],
         "BPM": [125, 128],
         "Octave": [[1]],
-        "Instruments": ["Male Vocal", "Pipe Organ", "Piano", "Classical Guitar"]
+        "Instruments": ["Cello", "Pipe Organ", "Piano", "Classical Guitar"]
     },
     'Surprise': {
         "Key": ["G Major", "F Major"],
         "BPM": [127, 196],
         "Octave": [[2, 3]],
-        "Instruments": ["Electric Guitar", "Exciting Drums", "Bass Guitar", "Female Vocal"]
+        "Instruments": ["Electric Guitar", "Drums", "Bass Guitar"]
     },
     'Neutral': {
         "Key": ["C# Major", "E Major"],
         "BPM": [108, 75],
         "Octave": [[1, 2]],
-        "Instruments": ["Bass Guitar", "Harp", "Female Vocal", "Classical Guitar"]
+        "Instruments": ["Flute", "Saxophone", "Harp", "Classical Guitar"]
     }
 }
 
 # 악기 이름과 music21 악기 클래스 매핑
 instrument_mapping = {
     "Piano": instrument.Piano(),
+    "Violin": instrument.Violin(),
+    "Cello": instrument.Violoncello(),
+    "Flute": instrument.Flute(),
     "Harpsichord": instrument.Harpsichord(),
     "Guitar": instrument.AcousticGuitar(),
     "Electric Guitar": instrument.ElectricGuitar(),
-    "Drums": instrument.SnareDrum(),
+    "Drums": instrument.BassDrum(),
+    "Cymbals": instrument.Cymbals(),
+    "Saxophone": instrument.Saxophone(),
     "Percussion": instrument.Percussion(),
     "Electric Piano": instrument.ElectricPiano(),
     "Pipe Organ": instrument.PipeOrgan(),
     "Classical Guitar": instrument.AcousticGuitar(),
     "Bass Guitar": instrument.ElectricBass(),
     "Harp": instrument.Harp(),
-    "Male Vocal": instrument.Vocalist(),
-    "Female Vocal": instrument.Vocalist(),
     "Chimes": instrument.TubularBells(),
     "Mezzo-soprano": instrument.MezzoSoprano()
 }
@@ -203,7 +191,6 @@ def extend_melody_with_key_chord(tinynotation_str, emotion):
     s.metadata.title = f"Extended Melody with {chosen_key} Chord Based on {emotion}"
     s.append(p)
     return s
-
 
 def assign_instruments_to_score(score, emotion):
     

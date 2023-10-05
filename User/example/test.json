@@ -1,4 +1,4 @@
-{"User": {"ID": "example", "Selected_Image": "happy.jpg", 
+{"User": {"ID": "example", "Selected_Image": "sad.jpg", 
     "Option": {
         "Program": "EMO", 
         "Bpm": "Presto", 
@@ -6,7 +6,7 @@
         "Note": "2", 
         "Octave": "1", 
         "Harmony": "1",
-        "Predicted_Emotion": "Angry"
+        "Predicted_Emotion": "Sad"
     }, 
     "Result": {
         "Score_path": "/Results/Score/", 
