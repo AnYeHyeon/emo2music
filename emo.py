@@ -53,20 +53,13 @@ def emotion_to_music(emotion, num_note, diff_divided, scale):
 
     print(music_note)
 
-    # 1. 화성 쌓기
+    # 1. 화성 쌓기, 2. BPM 할당
     score_with_chord = extend_melody_with_key_chord(music_note, emotion)
-    score_with_chord.show()
+    # score_with_chord.show()
     
-    # 2. 악기 할당
-    # instrument_musicnote = assigning_instrument(score_with_chord)
-    # score = instrument_musicnote
-
-    # 3. BPM 결정
-
-
-    # 4. 
-
-
+    # 3. 악기 할당
+    score_with_instruments = assign_instruments_to_score(score_with_chord, emotion)
+    # score_with_instruments.show()
 
 
 
@@ -87,46 +80,119 @@ def emotion_to_music(emotion, num_note, diff_divided, scale):
 import random
 from music21 import stream, note, chord, metadata, tempo
 
-# 감정에 따른 키 정보
-emotion_to_keys = {
-    'Happy': ["F# Minor", "D Major", "F Major"],
-    'Disgust': ["C Major", "C Minor"],
-    'Fear': ["C Major", "Bb Minor", "G Minor"],
-    'Angry': ["F# Minor", "F Minor"],
-    'Sad': ["C# Major", "Bb Major"],
-    'Surprise': ["G Major", "F Major"],
-    'Neutral': ["C# Major", "E Major"]
+# 감정에 따른 음악 요소 정보
+emotion_to_music_features = {
+    'Happy': {
+        "Key": ["F# Minor", "D Major", "F Major"],
+        "BPM": [138, 132, 150],
+        "Octave": [[2], [3]],
+        "Instruments": ["Piano", "Harpsichord", "Guitar"]
+    },
+    'Disgust': {
+        "Key": ["C Major", "C Minor"],
+        "BPM": [129, 125],
+        "Octave": [[1]],
+        "Instruments": ["Percussion (Marimba, Chimes)", "Harpsichord"]
+    },
+    'Fear': {
+        "Key": ["C Major", "Bb Minor", "G Minor"],
+        "BPM": [120, 90, 84],
+        "Octave": [[2]],
+        "Instruments": ["Drums", "Piano", "Electric Guitar", "Chimes", "Mezzo-soprano"]
+    },
+    'Angry': {
+        "Key": ["F# Minor", "F Minor"],
+        "BPM": [125, 120],
+        "Octave": [ [2], [3]],
+        "Instruments": ["Drums", "Electric Piano", "Chimes", "Piano"]
+    },
+    'Sad': {
+        "Key": ["C# Major", "Bb Major"],
+        "BPM": [125, 128],
+        "Octave": [[1]],
+        "Instruments": ["Male Vocal", "Pipe Organ", "Piano", "Classical Guitar"]
+    },
+    'Surprise': {
+        "Key": ["G Major", "F Major"],
+        "BPM": [127, 196],
+        "Octave": [[2, 3]],
+        "Instruments": ["Electric Guitar", "Exciting Drums", "Bass Guitar", "Female Vocal"]
+    },
+    'Neutral': {
+        "Key": ["C# Major", "E Major"],
+        "BPM": [108, 75],
+        "Octave": [[1, 2]],
+        "Instruments": ["Bass Guitar", "Harp", "Female Vocal", "Classical Guitar"]
+    }
 }
 
-# 주어진 감정에 따라 무작위로 키를 선택하고 해당 키의 화성을 멜로디에 추가하는 함수
+# 악기 이름과 music21 악기 클래스 매핑
+instrument_mapping = {
+    "Piano": instrument.Piano(),
+    "Harpsichord": instrument.Harpsichord(),
+    "Guitar": instrument.AcousticGuitar(),
+    "Electric Guitar": instrument.ElectricGuitar(),
+    "Drums": instrument.SnareDrum(),
+    "Percussion": instrument.Percussion(),
+    "Electric Piano": instrument.ElectricPiano(),
+    "Pipe Organ": instrument.PipeOrgan(),
+    "Classical Guitar": instrument.AcousticGuitar(),
+    "Bass Guitar": instrument.ElectricBass(),
+    "Harp": instrument.Harp(),
+    "Male Vocal": instrument.Vocalist(),
+    "Female Vocal": instrument.Vocalist(),
+    "Chimes": instrument.TubularBells(),
+    "Mezzo-soprano": instrument.MezzoSoprano()
+}
+
+def get_chord_for_note_and_key(note_name, key_name):
+    major_chords = {
+        'C': ['C', 'E', 'G'],
+        'D': ['D', 'F#', 'A'],
+        'E': ['E', 'G#', 'B'],
+        'F': ['F', 'A', 'C'],
+        'G': ['G', 'B', 'D'],
+        'A': ['A', 'C#', 'E'],
+        'B': ['B', 'D#', 'F#']
+    }
+
+    minor_chords = {
+        'C': ['C', 'Eb', 'G'],
+        'D': ['D', 'F', 'A'],
+        'E': ['E', 'G', 'B'],
+        'F': ['F', 'Ab', 'C'],
+        'G': ['G', 'Bb', 'D'],
+        'A': ['A', 'C', 'E'],
+        'B': ['B', 'D', 'F#']
+    }
+
+    root = note_name[0].upper()  # get the root of the note
+    if "Major" in key_name:
+        return major_chords[root]
+    else:
+        return minor_chords[root]
+
 def extend_melody_with_key_chord(tinynotation_str, emotion):
     s = stream.Score()
     p = stream.Part()
     m = stream.Measure()
-    m.append(tempo.MetronomeMark(number=60))  # 60 BPM
+
+    BPM_list = emotion_to_music_features[emotion]['BPM']
+    BPM = sum(BPM_list) / len(BPM_list)
+    m.append(tempo.MetronomeMark(BPM))
     p.append(m)
 
     # 감정에 해당하는 키 목록에서 무작위로 키 선택
-    chosen_key = random.choice(emotion_to_keys[emotion])
+    chosen_key = random.choice(emotion_to_music_features[emotion]['Key'])
 
     # "2/4" (박자 표시)를 제외하고 음표만 분할
     notes_only = tinynotation_str.split()[1:]
 
     for n in notes_only:
         m = stream.Measure()
-
-        # Add melody note
-        melody_note = note.Note(n)
         
         # Create chord based on the melody note and the chosen key
-        if "Major" in chosen_key:
-            c_notes = [melody_note.nameWithOctave, 
-                       note.Note(melody_note.pitch.transpose('M3')).nameWithOctave,
-                       note.Note(melody_note.pitch.transpose('P5')).nameWithOctave]
-        else:  # Minor chord
-            c_notes = [melody_note.nameWithOctave, 
-                       note.Note(melody_note.pitch.transpose('m3')).nameWithOctave,
-                       note.Note(melody_note.pitch.transpose('P5')).nameWithOctave]
+        c_notes = get_chord_for_note_and_key(n, chosen_key)
         
         c = chord.Chord(c_notes)
         m.append(c)
@@ -138,28 +204,15 @@ def extend_melody_with_key_chord(tinynotation_str, emotion):
     return s
 
 
-
-
-def assigning_instrument(music_note):
-    # 스코어 생성
-    score = stream.Score()
-
-    # 피아노 파트
-    pianoPart = converter.parse("tinynotation: " + music_note)
-    piano = instrument.Piano()
-    pianoPart.insert(0, piano)
-    score.append(pianoPart)
-
-    # 기타 파트
-    guitarPart = converter.parse("tinynotation: " + music_note)
-    guitar = instrument.AcousticGuitar()
-    guitarPart.insert(0, guitar)
-    score.append(guitarPart)
-
-    # 첼로 파트
-    celloPart = converter.parse("tinynotation: " + music_note)
-    cello = instrument.Violoncello()
-    celloPart.insert(0, cello)
-    score.append(celloPart)
-
+def assign_instruments_to_score(score, emotion):
+    # 감정에 따라 선택된 악기 목록에서 무작위로 악기 선택
+    chosen_instruments = random.choice(emotion_to_music_features[emotion]['Instruments'])
+    print(chosen_instruments)
+    # 각 악기에 대한 파트 생성 및 추가
+    for inst_name in chosen_instruments:
+        # music21의 instrument 모듈에서 악기 이름을 찾아 객체를 생성
+        inst_obj = getattr(instrument, inst_name)() 
+        # 파트에 악기 객체 추가
+        score.parts[0].insert(0, inst_obj)
+    
     return score

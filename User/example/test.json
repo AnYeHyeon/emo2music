@@ -6,7 +6,7 @@
         "Note": "2", 
         "Octave": "1", 
         "Harmony": "1",
-        "Predicted_Emotion": "Happy"
+        "Predicted_Emotion": "Angry"
     }, 
     "Result": {
         "Score_path": "/Results/Score/", 
