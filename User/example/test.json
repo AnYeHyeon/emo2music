@@ -5,14 +5,14 @@
         "Bar": "8", 
         "Note": "2", 
         "Octave": "1", 
-        "Harmony": "1"
+        "Harmony": "1",
+        "Predicted_Emotion": "Happy"
     }, 
     "Result": {
         "Score_path": "/Results/Score/", 
         "Wave_path": "/Results/Wave/", 
         "Csd_path": "/Results/Csd/", 
         "Output_name": null}, 
-        "Success": null,
-        "Predicted_Emotion": "Happy"
+        "Success": null
     }
 }

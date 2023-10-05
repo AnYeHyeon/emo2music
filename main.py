@@ -31,6 +31,7 @@ num_bar = option_data['Bar']
 num_note = option_data['Note']
 num_octave = option_data['Octave']
 harmony_on = option_data['Harmony']
+detected_emo = option_data['Predicted_Emotion']
 
 # 4-1. set output name
 output_name = user_data["ID"] + Path(user_data["Selected_Image"]).stem + music_program + num_bpm + num_bar + num_note + num_octave + harmony_on
@@ -58,7 +59,7 @@ if music_program == 'F2M':
 # 7-1. emo Create Score
 elif music_program == 'EMO':
 
-    emotion_to_music(num_note, diff_divided, scale_org)
+    emotion_to_music(detected_emo, num_note, diff_divided, scale_org)
 
 
 
