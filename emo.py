@@ -1,4 +1,5 @@
 import re
+import copy
 from music21 import *
 
 def emotion_to_music(emotion, num_note, diff_divided, scale):
@@ -59,7 +60,7 @@ def emotion_to_music(emotion, num_note, diff_divided, scale):
     
     # 3. 악기 할당
     score_with_instruments = assign_instruments_to_score(score_with_chord, emotion)
-    # score_with_instruments.show()
+    score_with_instruments.show()
 
 
 
@@ -205,14 +206,30 @@ def extend_melody_with_key_chord(tinynotation_str, emotion):
 
 
 def assign_instruments_to_score(score, emotion):
-    # 감정에 따라 선택된 악기 목록에서 무작위로 악기 선택
-    chosen_instruments = random.choice(emotion_to_music_features[emotion]['Instruments'])
-    print(chosen_instruments)
-    # 각 악기에 대한 파트 생성 및 추가
-    for inst_name in chosen_instruments:
-        # music21의 instrument 모듈에서 악기 이름을 찾아 객체를 생성
-        inst_obj = getattr(instrument, inst_name)() 
-        # 파트에 악기 객체 추가
-        score.parts[0].insert(0, inst_obj)
     
+    # 감정에 따라 선택된 악기 목록에서 두 개의 악기를 무작위로 선택
+    chosen_instruments = random.sample(emotion_to_music_features[emotion]['Instruments'], 2)
+    print(chosen_instruments)
+    
+    # 첫 번째 악기 객체를 가져온다.
+    inst_obj1 = instrument_mapping[chosen_instruments[0]]
+    
+    # 두 번째 악기 객체를 가져온다.
+    inst_obj2 = instrument_mapping[chosen_instruments[1]]
+
+    # 첫 번째 파트에 첫 번째 악기 객체 추가
+    score.parts[0].insert(0, inst_obj1)
+    
+    # 두 번째 파트 생성 및 두 번째 악기 객체 추가
+    new_part = copy.deepcopy(score.parts[0])  # 기존 파트의 복사본을 생성
+    new_part.clear()  # 새 파트의 내용을 지운다.
+    new_part.insert(0, inst_obj2)  # 두 번째 악기 객체를 새 파트에 추가
+    
+    # 기존 파트의 노트들을 새 파트에 추가한다.
+    for element in score.parts[0].elements:
+        if not isinstance(element, instrument.Instrument):  # 악기 정보를 제외한 다른 요소들만 추가
+            new_part.append(copy.deepcopy(element))
+    
+    score.append(new_part)  # 스코어에 새로운 파트를 추가
+
     return score

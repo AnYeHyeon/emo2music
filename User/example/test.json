@@ -2,7 +2,7 @@
     "Option": {
         "Program": "EMO", 
         "Bpm": "Presto", 
-        "Bar": "8", 
+        "Bar": "16", 
         "Note": "2", 
         "Octave": "1", 
         "Harmony": "1",
