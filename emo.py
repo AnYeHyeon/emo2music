@@ -69,7 +69,7 @@ from music21 import stream, note, chord, metadata, tempo
 # 감정에 따른 음악 요소 정보
 emotion_to_music_features = {
     'Happy': {
-        "Key": ["F# Minor", "D Major", "F Major"],
+        "Key": ["D Major", "F Major"],
         "BPM": [138, 132, 150],
         "Octave": [[2], [3]],
         "Instruments": ["Piano", "Harpsichord", "Guitar"]
