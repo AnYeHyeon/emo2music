@@ -61,7 +61,10 @@ def emotion_to_music(emotion, num_note, diff_divided, scale):
     
     # 3. 악기 할당
     score_with_instruments = assign_instruments_to_score(score_with_chord, emotion)
-    score_with_instruments.show()
+    # score_with_instruments.show()
+
+    score_with_instruments.write('png', fp='./Score/score.png')
+
 
 import random
 from music21 import stream, note, chord, metadata, tempo
