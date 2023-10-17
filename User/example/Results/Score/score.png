@@ -1,0 +1,137 @@
+\version "2.24" 
+\include "lilypond-book-preamble.ly"
+    
+color = #(define-music-function (parser location color) (string?) #{
+        \once \override NoteHead #'color = #(x11-color color)
+        \once \override Stem #'color = #(x11-color color)
+        \once \override Rest #'color = #(x11-color color)
+        \once \override Beam #'color = #(x11-color color)
+     #})
+    
+\header { 
+ title = "Extended Melody with F# Minor Chord Based on Angry"   
+  
+  } 
+ 
+\score  { 
+ 
+      << \new Staff  = yezafcadwebcw { \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < g'  bes'  d'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < d'  f'  a'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < e'  g'  b'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < c'  ees'  g'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < c'  ees'  g'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < d'  f'  a'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < d'  f'  a'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+              } 
+            
+ 
+       \new Staff  = yezafcadaabfy { \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < b'  d'  fis'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < g'  bes'  d'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < d'  f'  a'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < e'  g'  b'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < a'  c'  e'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < f'  aes'  c'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < c'  ees'  g'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < c'  ees'  g'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < d'  f'  a'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+             < d'  f'  a'  > 4   
+             \bar "|"  %{ end measure 0 %} 
+              } 
+            
+ 
+        >>
+      
+  } 
+ 
+\paper { }
+\layout {
+  \context {
+    \RemoveEmptyStaffContext
+    \override VerticalAxisGroup #'remove-first = ##t
+  }
+ }
+ 
